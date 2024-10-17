@@ -1,0 +1,214 @@
+{
+        "name": "worksByType",
+        "description": "Works By Type",
+        "label": "Works By Type",
+        "mainEntityName": "work",
+        "outputMethod": "aggregate",
+        "analysisMethod": "expressions",
+        "roleList": "",
+        "tagList": "",
+        "creationDate": "2024-10-17T13:50:31.477671",
+        "controlOptions": {
+            "enabled": false,
+            "primaryPropertyName": "name"
+        },
+        "timeInfo": {
+            "enabled": false,
+            "type": "single",
+            "timeFieldName": "",
+            "format": "dd-MM-yyyy"
+        },
+        "outFields": [
+            "name",
+            "type",
+            "byType1",
+            "byType2"
+        ],
+        "expressions": {
+            "sequenceGraph": {
+                "vertices": {
+                    "byType1": {
+                        "name": "byType1"
+                    },
+                    "byType2": {
+                        "name": "byType2"
+                    }
+                },
+                "edges": [
+                    {
+                        "fromNodeName": "byType1",
+                        "toNodeName": "byType2",
+                        "properties": {}
+                    }
+                ]
+            },
+            "list": {
+                "byType1": {
+                    "label": "Type 1",
+                    "description": "Type 1",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "type",
+                            "fieldType": "string",
+                            "operator": "=",
+                            "value": "type1",
+                            "type": "attribute"
+                        }
+                    ]
+                },
+                "byType2": {
+                    "label": "Type 2",
+                    "description": "Type 2",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "type",
+                            "fieldType": "string",
+                            "operator": "=",
+                            "value": "type2",
+                            "type": "attribute"
+                        }
+                    ]
+                }
+            }
+        },
+        "visualizations": {
+            "summary": {
+                "widgets": {
+                    "worksByType": {
+                        "label": "Works By Type",
+                        "description": "Works By Type",
+                        "type": "pieChart",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "byType1",
+                                "byType2"
+                            ],
+                            "labelFieldName": "name"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "byType1",
+                            "byType2"
+                        ]
+                    }
+                },
+                "layout": {
+                    "rows": [
+                        {
+                            "dimensions": {
+                                "height": "100px"
+                            },
+                            "columns": [
+                                "worksByType"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "explorer": {
+                "widgets": {
+                    "worksByType": {
+                        "label": "Works By Type",
+                        "description": "Works By Type",
+                        "type": "pieChart",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "byType1",
+                                "byType2"
+                            ],
+                            "labelFieldName": "name"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "byType1",
+                            "byType2"
+                        ]
+                    },
+                    "w9Map": {
+                        "label": "Map",
+                        "description": "Map",
+                        "type": "map",
+                        "expressions": []
+                    },
+                    "w9Table": {
+                        "label": "My Table",
+                        "description": "Table description",
+                        "type": "table",
+                        "expressions": []
+                    }
+                },
+                "layout": {
+                    "top": {
+                        "region": "top",
+                        "orientation": "horizontal",
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "20%"
+                        },
+                        "widgets": [
+                            "workcompletedincompleted"
+                        ]
+                    },
+                    "left": {
+                        "region": "left",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "30%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "workcompletedincompleted"
+                        ]
+                    },
+                    "central": {
+                        "region": "central",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "60%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "w9Map"
+                        ]
+                    },
+                    "bottom": {
+                        "region": "bottom",
+                        "orientation": "horizontal",
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "30%"
+                        },
+                        "widgets": [
+                            "w9Table"
+                        ]
+                    }
+                },
+                "attributesToRead": {
+                    "parentEntityAttributeNames": [],
+                    "mainEntityAttributeNames": [
+                        "work"
+                    ],
+                    "childrenEntityAttributeNames": {}
+                }
+            }
+        },
+        "surveyName": "projectmanagement"
+    }
