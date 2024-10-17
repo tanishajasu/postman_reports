@@ -1,0 +1,119 @@
+ {
+        "name": "demoreport",
+        "description": "demoreport",
+        "label": "count project",
+        "mainEntityName": "project",
+        "outputMethod": "aggregate",
+        "analysisMethod": "expressions",
+        "roleList": "",
+        "tagList": "",
+        "creationDate": "2024-10-16T18:01:24.556975",
+        "controlOptions": {
+            "enabled": false,
+            "primaryPropertyName": "name"
+        },
+        "timeInfo": {
+            "enabled": false,
+            "type": "single",
+            "timeFieldName": "",
+            "format": "dd-MM-yyyy"
+        },
+        "outFields": [
+            "projectcount"
+        ],
+        "expressions": {
+            "sequenceGraph": {
+                "vertices": {
+                    "projectcount": {
+                        "name": "projectcount"
+                    }
+                },
+                "edges": []
+            },
+            "list": {
+                "projectcount": {
+                    "label": "Number of project",
+                    "description": "This expression counts the number of project",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "project",
+                        "valueFieldName": "projectid"
+                    },
+                    "clauses": []
+                }
+            }
+        },
+        "visualizations": {
+            "summary": {
+                "widgets": {
+                    "projectcountwidget": {
+                        "label": "count of project",
+                        "description": "count of project",
+                        "type": "text",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "projectcount"
+                            ],
+                            "labelFieldName": "value"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "projectcount"
+                        ]
+                    }
+                },
+                "layout": {
+                    "rows": [
+                        {
+                            "dimensions": {
+                                "height": "100px"
+                            },
+                            "columns": [
+                                "projectcountwidget"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "explorer": {
+                "widgets": {
+                    "projectidwidget": {
+                        "label": "School Count",
+                        "description": "School Count",
+                        "type": "text",
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "projectcount"
+                        ]
+                    }
+                },
+                "layout": {
+                    "section1": {
+                        "region": "center",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "60%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "projectidwidget"
+                        ]
+                    }
+                },
+                "attributesToRead": {
+                    "parentEntityAttributeNames": [],
+                    "mainEntityAttributeNames": [
+                        "project"
+                    ],
+                    "childrenEntityAttributeNames": {}
+                }
+            }
+        },
+        "surveyName": "projectmanagement"
+    },
