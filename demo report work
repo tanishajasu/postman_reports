@@ -1,0 +1,119 @@
+{
+        "name": "demoreportwork",
+        "description": "demoreport for work",
+        "label": "count work",
+        "mainEntityName": "work",
+        "outputMethod": "aggregate",
+        "analysisMethod": "expressions",
+        "roleList": "",
+        "tagList": "",
+        "creationDate": "2024-10-17T15:45:26.166164",
+        "controlOptions": {
+            "enabled": false,
+            "primaryPropertyName": "name"
+        },
+        "timeInfo": {
+            "enabled": false,
+            "type": "single",
+            "timeFieldName": "",
+            "format": "dd-MM-yyyy"
+        },
+        "outFields": [
+            "workcount"
+        ],
+        "expressions": {
+            "sequenceGraph": {
+                "vertices": {
+                    "workcount": {
+                        "name": "workcount"
+                    }
+                },
+                "edges": []
+            },
+            "list": {
+                "workcount": {
+                    "label": "Number of work",
+                    "description": "This expression counts the number of work",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": []
+                }
+            }
+        },
+        "visualizations": {
+            "summary": {
+                "widgets": {
+                    "workcountwidget": {
+                        "label": "count of work",
+                        "description": "count of work",
+                        "type": "text",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "workcount"
+                            ],
+                            "labelFieldName": "value"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "workcount"
+                        ]
+                    }
+                },
+                "layout": {
+                    "rows": [
+                        {
+                            "dimensions": {
+                                "height": "100px"
+                            },
+                            "columns": [
+                                "workcountwidget"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "explorer": {
+                "widgets": {
+                    "projectidwidget": {
+                        "label": "School Count",
+                        "description": "School Count",
+                        "type": "text",
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "workcount"
+                        ]
+                    }
+                },
+                "layout": {
+                    "section1": {
+                        "region": "center",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "60%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "workidwidget"
+                        ]
+                    }
+                },
+                "attributesToRead": {
+                    "parentEntityAttributeNames": [],
+                    "mainEntityAttributeNames": [
+                        "work"
+                    ],
+                    "childrenEntityAttributeNames": {}
+                }
+            }
+        },
+        "surveyName": "projectmanagement"
+    },
