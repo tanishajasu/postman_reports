@@ -1,0 +1,47 @@
+{
+        "name": "amountInvested",
+        "description": "amountInvested",
+        "label": "Amount Invested in Works",
+        "mainEntityName": "work",
+        "outputMethod": "aggregate",
+        "analysisMethod": "expressions",
+        "roleList": "",
+        "tagList": "",
+        "creationDate": "2024-10-18T17:17:58.774317",
+        "controlOptions": {
+            "enabled": false,
+            "primaryPropertyName": "name"
+        },
+        "timeInfo": {
+            "enabled": false,
+            "type": "single",
+            "timeFieldName": "",
+            "format": "dd-MM-yyyy"
+        },
+        "outFields": [
+            "amountInvestedinWork"
+        ],
+        "expressions": {
+            "sequenceGraph": {
+                "vertices": {
+                    "amountInvestedinWork": {
+                        "name": "amountInvestedinWork"
+                    }
+                },
+                "edges": []
+            },
+            "list": {
+                "amountInvestedinWork": {
+                    "label": "Amount invested in Work",
+                    "description": "This expression s the total amount in invested in work",
+                    "dataType": "integer",
+                    "operation": "sum",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "amount"
+                    },
+                    "clauses": []
+                }
+            }
+        }
