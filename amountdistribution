@@ -1,0 +1,272 @@
+{
+        "name": "amountDistribution",
+        "description": "Amount distribution",
+        "label": "Amount Distribution",
+        "mainEntityName": "work",
+        "outputMethod": "aggregate",
+        "analysisMethod": "expressions",
+        "roleList": "",
+        "tagList": "",
+        "creationDate": "2024-10-18T18:43:43.071535",
+        "controlOptions": {
+            "enabled": false,
+            "primaryPropertyName": "name"
+        },
+        "timeInfo": {
+            "enabled": false,
+            "type": "single",
+            "timeFieldName": "",
+            "format": "dd-MM-yyyy"
+        },
+        "outFields": [
+            "allAmounts",
+            "allWorks",
+            "under1000",
+            "between1000and3000",
+            "above5000"
+        ],
+        "expressions": {
+            "sequenceGraph": {
+                "vertices": {
+                    "allAmounts": {
+                        "name": "allAmounts"
+                    },
+                    "allWorks": {
+                        "name": "allWorks"
+                    },
+                    "under1000": {
+                        "name": "under1000"
+                    },
+                    "between1000and3000": {
+                        "name": "between1000and3000"
+                    },
+                    "above5000": {
+                        "name": "above5000"
+                    }
+                },
+                "edges": [
+                    {
+                        "fromNodeName": "allAmounts",
+                        "toNodeName": "allWorks",
+                        "properties": {}
+                    },
+                    {
+                        "fromNodeName": "allWorks",
+                        "toNodeName": "under1000",
+                        "properties": {}
+                    },
+                    {
+                        "fromNodeName": "under1000",
+                        "toNodeName": "between1000and3000",
+                        "properties": {}
+                    },
+                    {
+                        "fromNodeName": "between1000and3000",
+                        "toNodeName": "above5000",
+                        "properties": {}
+                    }
+                ]
+            },
+            "list": {
+                "allWorks": {
+                    "label": "All Works",
+                    "description": "Total Works",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": []
+                },
+                "under1000": {
+                    "label": "Under 1000",
+                    "description": "Total amount under 1000",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": "<",
+                            "value": 1000,
+                            "type": "attribute"
+                        }
+                    ]
+                },
+                "between1000and3000": {
+                    "label": "between 1000 and 3000",
+                    "description": "Total amount range between 1000 and 3000",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": ">=",
+                            "value": 1000,
+                            "type": "attribute"
+                        },
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": "<=",
+                            "value": 3000,
+                            "type": "attribute"
+                        }
+                    ]
+                },
+                "above5000": {
+                    "label": "Above 5000",
+                    "description": "Amount above 5000",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": ">",
+                            "value": 5000,
+                            "type": "attribute"
+                        }
+                    ]
+                }
+            }
+        },
+        "visualizations": {
+            "summary": {
+                "widgets": {
+                    "amountRangeWidget": {
+                        "label": "Amount range of works",
+                        "description": "Bar graph showing Amount range of works",
+                        "type": "barGraph",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "under1000",
+                                "between1000and3000",
+                                "above5000"
+                            ],
+                            "labelFieldName": "allAmounts"
+                        },
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "400px"
+                        },
+                        "expressions": [
+                            "under1000",
+                            "between1000and3000",
+                            "above5000"
+                        ]
+                    }
+                },
+                "layout": {
+                    "rows": [
+                        {
+                            "dimensions": {
+                                "height": "400px"
+                            },
+                            "columns": [
+                                "amountRangeWidget"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "explorer": {
+                "widgets": {
+                    "amountRangeExplorer": {
+                        "label": "Explore Amount Range",
+                        "description": "Explore Amount Range of works",
+                        "type": "text",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "under1000",
+                                "between1000and3000",
+                                "above5000"
+                            ],
+                            "labelFieldName": "allAmounts"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "under1000",
+                            "between1000and3000",
+                            "above5000"
+                        ]
+                    },
+                    "ageMap": {
+                        "label": "Map of Amount range",
+                        "description": "Map showing Amount range across works",
+                        "type": "map",
+                        "expressions": []
+                    },
+                    "ageTable": {
+                        "label": "Age Distribution Table",
+                        "description": "Table displaying age distribution data",
+                        "type": "table",
+                        "expressions": []
+                    }
+                },
+                "layout": {
+                    "top": {
+                        "region": "top",
+                        "orientation": "horizontal",
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "20%"
+                        },
+                        "widgets": [
+                            "ageDistributionExplorer"
+                        ]
+                    },
+                    "central": {
+                        "region": "central",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "60%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "ageMap"
+                        ]
+                    },
+                    "bottom": {
+                        "region": "bottom",
+                        "orientation": "horizontal",
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "30%"
+                        },
+                        "widgets": [
+                            "ageTable"
+                        ]
+                    }
+                },
+                "attributesToRead": {
+                    "parentEntityAttributeNames": [],
+                    "mainEntityAttributeNames": [
+                        "work"
+                    ],
+                    "childrenEntityAttributeNames": {}
+                }
+            }
+        },
+        "surveyName": "projectmanagement"
+    }
