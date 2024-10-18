@@ -1,0 +1,286 @@
+{
+    "name": "ProjectsByType",
+    "description": "Projects By Type",
+    "label": "Projects By Type",
+    "mainEntityName": "project",
+    "outputMethod": "aggregate",
+    "analysisMethod": "expressions",
+    "roleList": "",
+    "tagList": "",
+    "creationDate": "2024-10-17T13:50:31.477671",
+    "controlOptions": {
+        "enabled": false,
+        "primaryPropertyName": "name"
+    },
+    "timeInfo": {
+        "enabled": false,
+        "type": "single",
+        "timeFieldName": "",
+        "format": "dd-MM-yyyy"
+    },
+    "outFields": [
+        "name",
+        "type",
+        "RS",
+        "DT",
+        "GSY",
+        "DEF"
+    ],
+    "expressions": {
+        "sequenceGraph": {
+            "vertices": {
+                "name": {
+                    "name": "name"
+                },
+                "type": {
+                    "name": "type"
+                },
+                "RS": {
+                    "name": "RS"
+                },
+                "DT": {
+                    "name": "DT"
+                },
+                "GSY": {
+                    "name": "GSY"
+                },
+                "DEF": {
+                    "name": "DEF"
+                }
+            },
+            "edges": [
+                {
+                    "fromNodeName": "RS",
+                    "toNodeName": "DT",
+                    "properties": {}
+                },
+                {
+                    "fromNodeName": "DT",
+                    "toNodeName": "GSY",
+                    "properties": {}
+                },
+                {
+                    "fromNodeName": "GSY",
+                    "toNodeName": "DEF",
+                    "properties": {}
+                }
+            ]
+        },
+        "list": {
+            "RS": {
+                "label": "Reinforced Wall",
+                "description": "Reinforced Wall",
+                "dataType": "integer",
+                "operation": "count",
+                "sourceEntity": {
+                    "type": "main",
+                    "name": "project",
+                    "valueFieldName": "projectid"
+                },
+                "clauses": [
+                    {
+                        "fieldName": "type",
+                        "fieldType": "string",
+                        "operator": "=",
+                        "value": "RS",
+                        "type": "attribute"
+                    }
+                ]
+            },
+            "DT": {
+                "label": "Gabion Wall",
+                "description": "Gabion Wall",
+                "dataType": "integer",
+                "operation": "count",
+                "sourceEntity": {
+                    "type": "main",
+                    "name": "project",
+                    "valueFieldName": "workid"
+                },
+                "clauses": [
+                    {
+                        "fieldName": "type",
+                        "fieldType": "string",
+                        "operator": "=",
+                        "value": "DT",
+                        "type": "attribute"
+                    }
+                ]
+            },
+            "GSY": {
+                "label": "Geosynthetic",
+                "description": "Geosynthetic",
+                "dataType": "integer",
+                "operation": "count",
+                "sourceEntity": {
+                    "type": "main",
+                    "name": "project",
+                    "valueFieldName": "projectid"
+                },
+                "clauses": [
+                    {
+                        "fieldName": "type",
+                        "fieldType": "string",
+                        "operator": "=",
+                        "value": "GSY",
+                        "type": "attribute"
+                    }
+                ]
+            },
+            "DEF": {
+                "label": "Defence cell wall protection",
+                "description": "Defence cell wall protection",
+                "dataType": "integer",
+                "operation": "count",
+                "sourceEntity": {
+                    "type": "main",
+                    "name": "project",
+                    "valueFieldName": "projectid"
+                },
+                "clauses": [
+                    {
+                        "fieldName": "type",
+                        "fieldType": "string",
+                        "operator": "=",
+                        "value": "DEF",
+                        "type": "attribute"
+                    }
+                ]
+            }
+        }
+    },
+    "visualizations": {
+        "summary": {
+            "widgets": {
+                "ProjectsByType": {
+                    "label": "Projects Types",
+                    "description": "Projects Types",
+                    "type": "pieChart",
+                    "widgetInfo": {
+                        "valueFieldName": [
+                            "RS",
+                            "DT",
+                            "GSY",
+                            "DEF"
+                        ],
+                        "labelFieldName": "name"
+                    },
+                    "dimensions": {
+                        "width": "100%"
+                    },
+                    "expressions": [
+                        "RS",
+                        "DT",
+                        "GSY",
+                        "DEF"
+                    ]
+                }
+            },
+            "layout": {
+                "rows": [
+                    {
+                        "dimensions": {
+                            "height": "100px"
+                        },
+                        "columns": [
+                            "ProjectsByType"
+                        ]
+                    }
+                ]
+            }
+        },
+        "explorer": {
+            "widgets": {
+                "ProjectsByType": {
+                    "label": "Projects Types",
+                    "description": "Projects Types",
+                    "type": "pieChart",
+                    "widgetInfo": {
+                        "valueFieldName": [
+                            "RS",
+                            "DT",
+                            "GSY",
+                            "DEF"
+                        ],
+                        "labelFieldName": "name"
+                    },
+                    "dimensions": {
+                        "width": "100%"
+                    },
+                    "expressions": [
+                        "RS",
+                        "DT",
+                        "GSY",
+                        "DEF"
+                    ]
+                },
+                "w9Map": {
+                    "label": "Map",
+                    "description": "Map",
+                    "type": "map",
+                    "expressions": []
+                },
+                "w9Table": {
+                    "label": "My Table",
+                    "description": "Table description",
+                    "type": "table",
+                    "expressions": []
+                }
+            },
+            "layout": {
+                "top": {
+                    "region": "top",
+                    "orientation": "horizontal",
+                    "dimensions": {
+                        "width": "100%",
+                        "height": "20%"
+                    },
+                    "widgets": [
+                        "workcompletedincompleted"
+                    ]
+                },
+                "left": {
+                    "region": "left",
+                    "orientation": "vertical",
+                    "dimensions": {
+                        "width": "30%",
+                        "height": "100%"
+                    },
+                    "widgets": [
+                        "workcompletedincompleted"
+                    ]
+                },
+                "central": {
+                    "region": "central",
+                    "orientation": "vertical",
+                    "dimensions": {
+                        "width": "60%",
+                        "height": "100%"
+                    },
+                    "widgets": [
+                        "w9Map"
+                    ]
+                },
+                "bottom": {
+                    "region": "bottom",
+                    "orientation": "horizontal",
+                    "dimensions": {
+                        "width": "100%",
+                        "height": "30%"
+                    },
+                    "widgets": [
+                        "w9Table"
+                    ]
+                }
+            },
+            "attributesToRead": {
+                "parentEntityAttributeNames": [],
+                "mainEntityAttributeNames": [
+                    "project"
+                ],
+                "childrenEntityAttributeNames": {}
+            }
+        }
+    },
+    "surveyName": "projectmanagement"
+}
