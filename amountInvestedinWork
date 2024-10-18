@@ -44,4 +44,76 @@
                     "clauses": []
                 }
             }
-        }
+        },
+        "visualizations": {
+            "summary": {
+                "widgets": {
+                    "projectwidget": {
+                        "label": "Total amount invested in work",
+                        "description": " of Total amount invested in work",
+                        "type": "text",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "amountInvestedinWork"
+                            ],
+                            "labelFieldName": "value"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "amountInvestedinWork"
+                        ]
+                    }
+                },
+                "layout": {
+                    "rows": [
+                        {
+                            "dimensions": {
+                                "height": "100px"
+                            },
+                            "columns": [
+                                "projectwidget"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "explorer": {
+                "widgets": {
+                    "projectidwidget": {
+                        "label": "School ",
+                        "description": "School ",
+                        "type": "text",
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "amountInvestedinWork"
+                        ]
+                    }
+                },
+                "layout": {
+                    "section1": {
+                        "region": "center",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "60%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "projectwidget"
+                        ]
+                    }
+                },
+                "attributesToRead": {
+                    "parentEntityAttributeNames": [],
+                    "mainEntityAttributeNames": [
+                        "work"
+                    ],
+                    "childrenEntityAttributeNames": {}
+                }
+            }
+        },
+        "surveyName": "projectmanagement"
+    }
