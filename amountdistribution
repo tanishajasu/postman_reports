@@ -270,3 +270,257 @@
         },
         "surveyName": "projectmanagement"
     }
+                
+<________________________________________________________________________________________________________________________________________>
+<-------------------------------------------------UPDATED--------------------------------------------------------------------------------->
+{
+        "name": "amountDistribution",
+        "description": "Amount distribution",
+        "label": "Amount Distribution",
+        "mainEntityName": "work",
+        "outputMethod": "aggregate",
+        "analysisMethod": "expressions",
+        "roleList": "",
+        "tagList": "",
+        "creationDate": "2024-10-21T18:40:40.219555",
+        "controlOptions": {
+            "enabled": false,
+            "primaryPropertyName": "name"
+        },
+        "timeInfo": {
+            "enabled": false,
+            "type": "single",
+            "timeFieldName": "",
+            "format": "dd-MM-yyyy"
+        },
+        "outFields": [
+            "allAmounts",
+            "contractAmount",
+            "TotalBilled",
+            "InProcessThisMonth"
+        ],
+        "expressions": {
+            "sequenceGraph": {
+                "vertices": {
+                    "allAmounts": {
+                        "name": "allAmounts"
+                    },
+                    "contractAmount": {
+                        "name": "contractAmount"
+                    },
+                    "TotalBilled": {
+                        "name": "TotalBilled"
+                    },
+                    "InProcessThisMonth": {
+                        "name": "InProcessThisMonth"
+                    }
+                },
+                "edges": [
+                    {
+                        "fromNodeName": "allAmounts",
+                        "toNodeName": "contractAmount",
+                        "properties": {}
+                    },
+                    {
+                        "fromNodeName": "contractAmount",
+                        "toNodeName": "TotalBilled",
+                        "properties": {}
+                    },
+                    {
+                        "fromNodeName": "TotalBilled",
+                        "toNodeName": "InProcessThisMonth",
+                        "properties": {}
+                    }
+                ]
+            },
+            "list": {
+                "contractAmount": {
+                    "label": "contractAmount",
+                    "description": "Total amount under 1000",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": "<",
+                            "value": 1000,
+                            "type": "attribute"
+                        }
+                    ]
+                },
+                "TotalBilled": {
+                    "label": "Total Billed",
+                    "description": "Total amount range between 1000 and 3000",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": ">=",
+                            "value": 1000,
+                            "type": "attribute"
+                        },
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": "<=",
+                            "value": 3000,
+                            "type": "attribute"
+                        }
+                    ]
+                },
+                "InProcessThisMonth": {
+                    "label": "InProcessThisMonth",
+                    "description": "Amount above 5000",
+                    "dataType": "integer",
+                    "operation": "count",
+                    "sourceEntity": {
+                        "type": "main",
+                        "name": "work",
+                        "valueFieldName": "workid"
+                    },
+                    "clauses": [
+                        {
+                            "fieldName": "amount",
+                            "fieldType": "integer",
+                            "operator": ">",
+                            "value": 5000,
+                            "type": "attribute"
+                        }
+                    ]
+                }
+            }
+        },
+        "visualizations": {
+            "summary": {
+                "widgets": {
+                    "amountRangeWidget": {
+                        "label": "Amount range of works",
+                        "description": "Bar graph showing Amount range of works",
+                        "type": "barGraph",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "contractAmount",
+                                "TotalBilled",
+                                "InProcessThisMonth"
+                            ],
+                            "labelFieldName": "allAmounts"
+                        },
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "400px"
+                        },
+                        "expressions": [
+                            "contractAmount",
+                            "TotalBilled",
+                            "InProcessThisMonth"
+                        ]
+                    }
+                },
+                "layout": {
+                    "rows": [
+                        {
+                            "dimensions": {
+                                "height": "400px"
+                            },
+                            "columns": [
+                                "amountRangeWidget"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "explorer": {
+                "widgets": {
+                    "amountRangeExplorer": {
+                        "label": "Explore Amount Range",
+                        "description": "Explore Amount Range of works",
+                        "type": "text",
+                        "widgetInfo": {
+                            "valueFieldName": [
+                                "contractAmount",
+                                "TotalBilled",
+                                "InProcessThisMonth"
+                            ],
+                            "labelFieldName": "allAmounts"
+                        },
+                        "dimensions": {
+                            "width": "100%"
+                        },
+                        "expressions": [
+                            "contractAmount",
+                            "TotalBilled",
+                            "InProcessThisMonth"
+                        ]
+                    },
+                    "ageMap": {
+                        "label": "Map of Amount range",
+                        "description": "Map showing Amount range across works",
+                        "type": "map",
+                        "expressions": []
+                    },
+                    "ageTable": {
+                        "label": "Age Distribution Table",
+                        "description": "Table displaying age distribution data",
+                        "type": "table",
+                        "expressions": []
+                    }
+                },
+                "layout": {
+                    "top": {
+                        "region": "top",
+                        "orientation": "horizontal",
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "20%"
+                        },
+                        "widgets": [
+                            "ageDistributionExplorer"
+                        ]
+                    },
+                    "central": {
+                        "region": "central",
+                        "orientation": "vertical",
+                        "dimensions": {
+                            "width": "60%",
+                            "height": "100%"
+                        },
+                        "widgets": [
+                            "ageMap"
+                        ]
+                    },
+                    "bottom": {
+                        "region": "bottom",
+                        "orientation": "horizontal",
+                        "dimensions": {
+                            "width": "100%",
+                            "height": "30%"
+                        },
+                        "widgets": [
+                            "ageTable"
+                        ]
+                    }
+                },
+                "attributesToRead": {
+                    "parentEntityAttributeNames": [],
+                    "mainEntityAttributeNames": [
+                        "work"
+                    ],
+                    "childrenEntityAttributeNames": {}
+                }
+            }
+        },
+        "surveyName": "projectmanagement"
+    }
